@@ -43,7 +43,7 @@ The first road build can temporarily require free disk space about the size of t
 
 ## Existing and imported maps
 
-TrackStudio 0.2.2 can open FlatOut 4 VR's installed stock tracks without a game source checkout. Compatible maps imported from WRC 9, TT Isle of Man 2 and V-Rally 4 are copies for viewing and editing; building, testing and publishing those imports into FlatOut 4 VR are disabled. Unsupported assets are reported, and the original game files are not edited.
+TrackStudio 0.2.2 can open FlatOut 4 VR's installed stock tracks without a game source checkout.
 
 ## Game compatibility
 
