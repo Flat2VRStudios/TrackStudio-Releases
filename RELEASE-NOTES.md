@@ -2,6 +2,7 @@
 
 - Fixes custom FBX imports with solid collision by bundling `TrackStudio.PhysXCooker.exe`. Players no longer need to find or build the helper themselves.
 - Rebuilds generated WinUI resources during release packaging to prevent stale XAML from breaking startup.
+- Prevents duplicate meshes and helper markers when parent and child edits reach the viewport in the same frame, and discards queued nodes from replaced actor trees.
 - Adds **File → Check FlatOut conversion...** for imported maps, with background progress, cancellation, actor lookup and saved reports. It checks captured scene state and scenery along splines while editing continues.
 - Expands imported asset support for materials, textures, collision, terrain, spline scenery and animation, with corresponding preview and conversion checks. Imported maps remain for inspection and editing; complete track conversion, in-game racing and publishing remain restricted.
 - Improves imported material rendering, texture uploads and shader handling, including PBR and atlas previews.

@@ -18,6 +18,7 @@ You need your own updated Steam installation of **FlatOut 4 VR**, Windows 10 ver
 
 - Custom FBX imports with solid collision now include the required `TrackStudio.PhysXCooker.exe`. Extract the complete editor download into a new folder; no C++ tools are needed.
 - Release builds regenerate WinUI resources to avoid stale XAML breaking startup.
+- Queued scene edits no longer duplicate meshes and helper markers when parent and child subtrees change together.
 - Imported-map conversion checks run in a separate window with progress, cancellation, actor lookup and saved reports, alongside expanded asset conversion and rendering support. Imported maps remain for inspection and editing; complete track conversion, racing and publishing remain restricted.
 - The recent editing, save/close, material preview and tutorial improvements are included.
 
