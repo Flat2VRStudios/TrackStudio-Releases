@@ -16,7 +16,7 @@ You need your own updated Steam installation of **FlatOut 4 VR**, Windows 10 ver
 
 ## Learn Track Studio
 
-[![Track Studio tutorial — build, edit, race and share a FlatOut 4 VR track](docs/images/trackstudio-tutorial.jpg)](https://youtu.be/LvMekSUe_pw)
+[![Track Studio tutorial — build, edit, race and share a FlatOut 4 VR track](docs/images/trackstudio-tutorial.jpg)](https://gistpreview.github.io/?9c12eb4549742e2019ff128acefdf0b7)
 
 **[Watch the full video tutorial (40 minutes)](https://youtu.be/LvMekSUe_pw)** · **[Follow the illustrated, interactive guide](https://gistpreview.github.io/?9c12eb4549742e2019ff128acefdf0b7)**
 
