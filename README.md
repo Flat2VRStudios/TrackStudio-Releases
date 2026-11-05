@@ -6,13 +6,22 @@ This repository contains **public downloads and the player guide**. The editor's
 
 ## Get Track Studio
 
-**[Download TrackStudio 0.2.2 for Windows x64](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-0.2.2-win-x64.zip)** · **[All release files and checksums](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/latest)**
+**[Download TrackStudio 0.2.3 for Windows x64](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.3/TrackStudio-0.2.3-win-x64.zip)** · **[All release files and checksums](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/latest)**
 
 1. Unzip the editor into a folder you can write to.
 2. Run **TrackStudio.exe**. The **starter content pack is included**; no separate starter download or .NET installation is needed.
 3. Check the detected game, content pack and workspace folders, then choose **Start**.
 
 You need your own updated Steam installation of **FlatOut 4 VR**, Windows 10 version 1809 or later (64-bit), and a graphics card supporting Direct3D 11. You do not need a VR headset to build or test on your monitor. The editor download does not include the game or its content compiler.
+
+### New in 0.2.3
+
+- Custom FBX imports with solid collision now include the required `TrackStudio.PhysXCooker.exe`. Extract the complete editor download into a new folder; no C++ tools are needed.
+- Release builds regenerate WinUI resources to avoid stale XAML breaking startup.
+- Imported-map conversion checks run in a separate window with progress, cancellation, actor lookup and saved reports, alongside expanded asset conversion and rendering support. Imported maps remain for inspection and editing; complete track conversion, racing and publishing remain restricted.
+- The recent editing, save/close, material preview and tutorial improvements are included.
+
+Your existing workspace and **0.2.2 full prop pack** can be reused. See the [0.2.3 release notes](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/tag/v0.2.3).
 
 ## Learn Track Studio
 
@@ -24,7 +33,7 @@ The 18 chapters cover project setup, navigation, scenery, roads, terrain, vegeta
 
 ## Optional full prop pack
 
-The starter pack is enough for the first-track workflow. For the larger scenery catalogue, download **all nine matching 0.2.2 parts** into one folder. The full pack is about **9.8 GB to download / 13.4 GB installed**. Keep extra space for the downloaded ZIPs until installation is complete.
+The starter pack is enough for the first-track workflow. The optional **0.2.2 full prop pack remains compatible with 0.2.3**; it does not need to be downloaded again. For the larger scenery catalogue, download **all nine matching 0.2.2 parts** into one folder. The full pack is about **9.8 GB to download / 13.4 GB installed**. Keep extra space for the downloaded ZIPs until installation is complete.
 
 [Part 1](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part1-of-9.zip) | [Part 2](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part2-of-9.zip) | [Part 3](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part3-of-9.zip) | [Part 4](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part4-of-9.zip) | [Part 5](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part5-of-9.zip) | [Part 6](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part6-of-9.zip) | [Part 7](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part7-of-9.zip) | [Part 8](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part8-of-9.zip) | [Part 9](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part9-of-9.zip)
 
