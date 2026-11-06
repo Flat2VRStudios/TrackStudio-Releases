@@ -1,4 +1,13 @@
-# Track Studio 0.2.8
+# Track Studio 0.2.9
+
+- **Import 3D model**, the Asset Editor's **...** buttons and the other file browsers that don't open in your track's folder start in the folder you used last, or Documents the first time. 0.2.8 opened every one of them in Track Studio's install folder.
+- The Asset Editor's **...** buttons open the file browser over the Asset Editor, which waits for it, titled with the field and asset it is for. It used to open over the main window and leave the Asset Editor clickable. A file picked after the Asset Editor closed, or after its asset was edited, reloaded or shown for another platform, is no longer written to it, and if Windows can't show the browser the Asset Editor says so instead of Track Studio closing with an error.
+- A **Browse**, **...** or **Save** button pressed in any window while a file browser is already open brings that browser to the front. It used to do nothing.
+- In a developer checkout, the game-rendered **Rebuild probes** names the repair of older imported models in its first question and writes nothing if you cancel.
+- **Rebuild probes** stops if another level is opened while it asks a question or builds, instead of updating, repairing or rebuilding the level that is open then.
+- After a probe rebuild the viewport always returns to its own size, even if reloading the lighting fails.
+
+## Previous release: 0.2.8
 
 - Restores the modern Windows **Open file** dialog, with its address bar, search and navigation sidebar. It opens directly on its own desktop thread in the project's Levels folder, keeping the responsiveness and repeated-click crash fixes from 0.2.6.
 - Keeps cancellation, reopening, file-type filters and Unicode file paths working through the modern dialog. The Output log records its initialization time.
