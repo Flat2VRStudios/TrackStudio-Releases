@@ -1,4 +1,9 @@
-# Track Studio 0.2.7
+# Track Studio 0.2.8
+
+- Restores the modern Windows **Open file** dialog, with its address bar, search and navigation sidebar. It opens directly on its own desktop thread in the project's Levels folder, keeping the responsiveness and repeated-click crash fixes from 0.2.6.
+- Keeps cancellation, reopening, file-type filters and Unicode file paths working through the modern dialog. The Output log records its initialization time.
+
+## Previous release: 0.2.7
 
 - Probe maps rebuilt by **Ship → Lighting probes → Rebuild probes** face the right way. In the game, three faces of every compiled reflection and lighting cube were on the wrong side (the sky lit things from the side and the horizon showed in upward reflections); in the editor the rebuilt reflections were mirrored left to right. Rebuild the probes and build/export the track again to update them. Checked against the engine's own compiled probes.
 - Opening another level while probes are rebuilding no longer leaves the viewport stuck in game lighting at a small capture size, and probe maps are written through a checked temporary file so a full disk can't leave a truncated one.
