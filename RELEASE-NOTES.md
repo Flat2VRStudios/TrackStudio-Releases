@@ -1,4 +1,74 @@
-# Track Studio 0.2.3
+# Track Studio 0.2.4
+
+- Adds **Save copy as new level** for installed FlatOut tracks, preserving editable actors and owned runtime data in a separate workspace.
+- Preserves a track's race, arena and stunt events, including modes, layers, weather/time presets, minimaps and bomb settings, in exported track folders. Expanded event and script features require a matching game build.
+- Adds **File → Create FlatOut conversion project…** with a separate destination, optional source route, explicit collision mappings and a saved report of remaining work. These projects remain conversion drafts; development exports are available and release exports stay blocked.
+- Adds **Track → Track files and Lua…** to open the track's content folder or edit its level script. Existing scripts are preserved; a new script receives a start/stop template.
+- Retains explicitly mapped collision groups through static and animated imported assets, placement and export, with separate instance identities for different policies.
+- Keeps basic single-race installation compatible with the original track-folder runtime, while refusing unsupported event settings or resources before replacing an installed track. Complete exports retain every event and setting.
+- Restores textures when **Show/hide → Scene → Textures** is enabled after models have loaded, including cached props and generated road geometry.
+- Preserves camera rotation and movement speeds when restarting or changing projects, and saves fly-speed changes from the speed controls and mouse wheel.
+- Makes deliberate selection changes undoable, so an accidental selection can be undone before undoing a move. Selection history does not mark level files as modified.
+- Places conversion-draft models in one scene refresh and undo step, with progress and cancellation, reducing repeated work on large imports.
+- Imports FBX normal and emission maps, with OpenGL/Blender or DirectX normal conventions, correct tangent space and clear warnings for stock-shader emission limits or missing maps.
+- Fixes imported FBX props appearing as plain colours, or disappearing when solid collision is enabled. Reimport an older affected prop under a new name; existing assets are preserved.
+
+Saving and recovery:
+- Keeps a crashed session's recovery copy until you choose **Restore** or **Discard them**. **Later** asks again next time; autosaves no longer delete it while the question is open.
+- Saves every change you made: an edit made after undoing past a save, an edit older than the undo limit, and a terrain stroke made after undoing past a save are no longer treated as already saved.
+- Drops a prefab's unsaved edits when you close the level without saving, instead of carrying them into the next level.
+- Saves a new prefab even when the layer that uses it is unloaded.
+- **Save layers of the selection** writes all the chosen layers or none of them.
+- **Save mine anyway** saves only the files that save was for.
+- Never saves over a terrain tile it couldn't read; the save names the tile to undo instead.
+- Leaves no partial temporary file beside a level when a save fails, for example on a full disk.
+- Takes an emergency recovery copy before writing a crash report, and keeps running when a crash report can't be written.
+
+Editing:
+- Viewport shortcuts no longer fire while you type in the paint and road panels: Delete, letters, Space, Enter and Esc go to the text box.
+- Editing one value of a range on several actors with different ranges changes only that value.
+- Duplicating or pasting a prefab instance keeps the children it removed from the prefab removed.
+- Duplicating a parent together with its selected child copies the child once.
+- Reordering actors in the Outliner keeps them exactly as they were written.
+- Saving keeps comments and each line's own line ending; undo puts attributes back in the serializer's order.
+- Cut no longer deletes the actors when the clipboard is busy; a notice asks you to try again.
+- **Check level** and **Sink selected** work on a copy of the level, so editing while they run is safe.
+- Opening a level while another is still loading is refused with a notice instead of leaking the first one.
+
+Viewport:
+- Uses the game's own shadow cascade fit and depth bias: contact shadows stay attached to poles, walls and cars, and cascade edges no longer crawl as the camera moves.
+- Projected decals no longer corrupt transparent parts drawn after them.
+- Deleted lights, probes, effects, decals and colliders stop drawing and picking at once, with their children.
+- A deleted road, spline scenery, lake or decal (or an undone one) stops drawing at once instead of staying until the next road edit.
+
+New tracks and terrain:
+- New terrain tracks get vegetation and streaming files in the form the game reads (one instance count per 64-sample chunk).
+- Imported multi-tile worlds place brushes, vegetation and chunks on the right tiles.
+
+Project setup and updates:
+- A damaged or newer content pack manifest returns to project setup with guidance instead of a crash.
+- After an update, uses the content pack that came with the new release, and tells you which pack it replaced.
+- Warns when your tracks folder is inside the Track Studio folder (an update would delete it), and no longer suggests one there.
+- Clears what an interrupted prop-pack install left behind before checking free space.
+
+Sharing:
+- Basic single-race installation preserves settings on the original track-folder runtime; expanded events or unsupported settings still require the updated game.
+- Keeps a slow Workshop upload going while Steam reports progress.
+- Names the missing `steam_api64.dll` instead of showing a loader error, and logs the Workshop helper's errors.
+- Checks the name and description against Steam's length limits before creating the Workshop item.
+
+Import and tools:
+- Re-importing a map from another game asks before replacing your edits, and backs up the old files when you replace them.
+- A damaged texture in an imported map no longer stops the import; packaged files with unsafe names are refused.
+- `TrackStudio.exe --help` lists the options; an unknown option or a missing value ends with exit code 2 instead of opening the editor.
+- MCP: a cancelled request no longer breaks the link to the editor, tools that can delete or overwrite say so, and `list_assets` stays on the project's drives.
+- Test runs that stop answering end with a clear message instead of waiting for ever.
+- `THIRD-PARTY-NOTICES.md` lists every bundled component with its licence text.
+- **Help → Getting started**, **Help → Publishing to the Steam Workshop**, **About Track Studio** and the Prefabs tab's **Open Releases** link open the public Track Studio page instead of a private one; bug reports go to its Issues.
+
+The starter content pack is included. The optional **0.2.2 full prop pack** remains compatible. Complete imported-track conversion and certification of every race/stunt remain separate work; creating a conversion draft does not certify a playable port.
+
+## Previous release: 0.2.3
 
 - Fixes custom FBX imports with solid collision by bundling `TrackStudio.PhysXCooker.exe`. Players no longer need to find or build the helper themselves.
 - Rebuilds generated WinUI resources during release packaging to prevent stale XAML from breaking startup.
