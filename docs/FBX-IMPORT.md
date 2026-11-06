@@ -6,7 +6,17 @@ Images can be embedded, relative to the FBX, at their saved file path, beside th
 
 The importer keeps the model, material sources and compiled resources under the track's `GRAPH/MODS/<LEVEL>/` namespace. Reimport an existing FBX to create a new prop with these maps; existing materials are not rewritten automatically.
 
-The editor's source material bindings keep the original FBX node names and material slots; the game's compiled bindings use the combined imported prop. Solid imports keep the visible surface as well as its collider. If an older imported prop appears as a solid colour only in the editor, reimport it under a new name with this version to create corrected source bindings.
+The editor's source material bindings keep the original FBX node names and material slots; the game's compiled bindings use the combined imported prop. Solid imports keep the visible surface as well as its collider. Older imports can be repaired in place when rebuilding probes, without reimporting the FBX or replacing the placed actors.
+
+### Solid colours in reflections
+
+On a retail install, **Ship → Lighting probes → Rebuild probes** captures Track Studio's own rendered scene. An older FBX import with broken editor material bindings can therefore look textured in the game while its rebuilt reflections contain the editor's plain fallback colours. The compiled model and the probe maps are separate resources: a working game material does not correct a reflection already baked from the faulty preview.
+
+Use **Ship → Lighting probes → Rebuild probes** in a build containing the existing-import repair. It checks the imported FBX resources used by the open level, repairs the known older source-binding layout, reloads the models and textures, and then renders the probes. Material assignments and edits, the staged FBX, compiled geometry, textures, collision data and actor placement are preserved. Original source descriptors and a repair receipt are backed up below the workspace's `.trackstudio/repairs/fbx-bindings/` folder. Repeating the command does not repair or back up already-corrected imports again.
+
+The repair verifies the original mesh/slot order against the staged FBX and compiled model. A changed mesh, missing material or custom collision layout is reported for review before any repair or probe map is written; it does not guess assignments or partially repair a batch. Stock assets and unrelated resources are left alone. Version 0.2.4 fixed new imports, but did not contain this in-place repair.
+
+Capture waits for the repaired textures, builds visibility separately for every cube face, uses the DDS face orientation, and omits editor helpers and selection highlights. It captures textured, lit surfaces even when the viewport's meshes, textures or game lighting are hidden, then restores the view settings. The rebuilt DDS cubes keep all six faces and reflection mip levels and reload into the editor's lighting. The filter remains Track Studio's CPU approximation, not CubeMapGen-identical. Build/export and install the updated track afterwards so the new probe maps reach the game.
 
 ## Normal maps
 

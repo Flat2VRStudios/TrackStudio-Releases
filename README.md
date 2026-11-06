@@ -6,7 +6,7 @@ This repository contains **public downloads and the player guide**. The editor's
 
 ## Get Track Studio
 
-**[Download TrackStudio 0.2.4 for Windows x64](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.4/TrackStudio-0.2.4-win-x64.zip)** · **[All release files and checksums](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/latest)**
+**[Download TrackStudio 0.2.5 for Windows x64](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.5/TrackStudio-0.2.5-win-x64.zip)** · **[All release files and checksums](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/latest)**
 
 1. Unzip the editor into a folder you can write to.
 2. Run **TrackStudio.exe**. The **starter content pack is included**; no separate starter download or .NET installation is needed.
@@ -14,18 +14,17 @@ This repository contains **public downloads and the player guide**. The editor's
 
 You need your own updated Steam installation of **FlatOut 4 VR**, Windows 10 version 1809 or later (64-bit), and a graphics card supporting Direct3D 11. You do not need a VR headset to build or test on your monitor. The editor download does not include the game or its content compiler.
 
-### New in 0.2.4
+### New in 0.2.5
 
-- Keeps camera movement and rotation speeds across restarts, and makes accidental selection changes undoable.
-- Restores textures when you enable them after models load, and fixes source material bindings and visible surfaces on new solid FBX imports.
-- Imports FBX normal and emission maps with explicit normal conventions and warnings for stock-shader limits. Reimport an older affected prop under a new name; its original assets are preserved.
-- Copies installed FlatOut tracks into separate editable levels and preserves their events and owned content in complete exports. Expanded events and scripts need matching game support; supported basic races remain compatible with the original track-folder format.
-- Adds conversion projects with progress and retained reports. These stay drafts until their remaining conversion and gameplay checks are completed.
-- Adds track-file and Lua starter authoring, plus the audited save, history, terrain and rendering improvements.
+- Repairs the known older FBX material-binding problem in place before **Ship → Lighting probes → Rebuild probes**. It keeps material edits and placed objects, and backs up the original source descriptors; reimporting is no longer needed for this problem.
+- Captures textured geometry for every probe face and reloads the rebuilt lighting and reflections into the editor. Probe filtering remains an approximation of the game's filter.
+- Lets players without Wreck Run saves use **Test in game**, and protects the saves of the Steam account currently signed in.
+- Adds opt-in **Custom map AI** and **Custom object collision** controls. These need matching game support; see [custom map policies](docs/CUSTOM_MAP_AI.md).
+- Preserves supported primitive colliders and parent transforms in conversion drafts. Conversion projects remain drafts until their conversion and gameplay checks are complete.
 
 See [FBX material import](docs/FBX-IMPORT.md) and [track folders and level scripts](docs/TRACK_FOLDERS.md).
 
-Your existing workspace and **0.2.2 full prop pack** can be reused. See the [0.2.4 release notes](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/tag/v0.2.4).
+Your existing workspace and **0.2.2 full prop pack** can be reused. See the [0.2.5 release notes](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/tag/v0.2.5).
 
 ## Learn Track Studio
 
@@ -37,7 +36,7 @@ The 18 chapters cover project setup, navigation, scenery, roads, terrain, vegeta
 
 ## Optional full prop pack
 
-The starter pack is enough for the first-track workflow. The optional **0.2.2 full prop pack remains compatible with 0.2.4**; it does not need to be downloaded again. For the larger scenery catalogue, download **all nine matching 0.2.2 parts** into one folder. The full pack is about **9.8 GB to download / 13.4 GB installed**. Keep extra space for the downloaded ZIPs until installation is complete.
+The starter pack is enough for the first-track workflow. The optional **0.2.2 full prop pack remains compatible with 0.2.5**; it does not need to be downloaded again. For the larger scenery catalogue, download **all nine matching 0.2.2 parts** into one folder. The full pack is about **9.8 GB to download / 13.4 GB installed**. Keep extra space for the downloaded ZIPs until installation is complete.
 
 [Part 1](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part1-of-9.zip) | [Part 2](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part2-of-9.zip) | [Part 3](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part3-of-9.zip) | [Part 4](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part4-of-9.zip) | [Part 5](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part5-of-9.zip) | [Part 6](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part6-of-9.zip) | [Part 7](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part7-of-9.zip) | [Part 8](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part8-of-9.zip) | [Part 9](https://github.com/Flat2VRStudios/TrackStudio-Releases/releases/download/v0.2.2/TrackStudio-PropPack-0.2.2-part9-of-9.zip)
 

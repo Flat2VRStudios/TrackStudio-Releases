@@ -1,4 +1,16 @@
-# Track Studio 0.2.4
+# Track Studio 0.2.5
+
+- Repairs known older imported FBX material bindings in place before **Ship → Lighting probes → Rebuild probes**, with source backups and preserved material edits, geometry and actor placement. Reimporting is no longer required for this known binding problem.
+- Rebuilds probe visibility for each cube face, waits for repaired textures, corrects cube orientation and excludes editor highlights and display modes from the capture.
+- Corrects rebuilt cube-map DDS headers and reflection uploads so the new lighting and reflections reload into the editor after baking.
+
+- **Test in game** starts the installed game for players who have never played Wreck Run; it no longer refuses because `WreckRunA.dat` and `WreckRunB.dat` are missing. Your saves are still put back as they were after the test, and a Wreck Run file the test created is moved to the workspace's `.trackstudio/profile-backups` folder.
+- **Test in game** protects the saves of the Steam account you're signed in as. It used to pick the account with the newest save, so on a PC with more than one Steam account a test could change your save without putting it back.
+- Adds opt-in **Custom map AI** and **Custom object collision** controls to the Track panel, with matching MCP tools, undo and game-capability checks. Native clearance reports propose narrower lane widths without changing the route. Tracks without these settings keep the game's own behaviour; tracks that use them need a matching game update (`tools/game-patches/custom-map-policies.patch`) and counted driving tests. See `docs/CUSTOM_MAP_AI.md`.
+- Conversion drafts keep static box, sphere and capsule colliders with their sizes, masks and supported rigid-body settings. Parent-owned compounds keep their intermediate actors and local transforms. An actor with a primitive collider keeps its visual model separate from any optional mesh physics.
+- Explains why an older FBX import can show plain colours in rebuilt reflections, and how to repair it ("Solid colours in reflections" in `docs/FBX-IMPORT.md`).
+
+## Previous release: 0.2.4
 
 - Adds **Save copy as new level** for installed FlatOut tracks, preserving editable actors and owned runtime data in a separate workspace.
 - Preserves a track's race, arena and stunt events, including modes, layers, weather/time presets, minimaps and bomb settings, in exported track folders. Expanded event and script features require a matching game build.
