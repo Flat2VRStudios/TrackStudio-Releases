@@ -1,4 +1,21 @@
-# Track Studio 0.2.6
+# Track Studio 0.2.7
+
+- Probe maps rebuilt by **Ship → Lighting probes → Rebuild probes** face the right way. In the game, three faces of every compiled reflection and lighting cube were on the wrong side (the sky lit things from the side and the horizon showed in upward reflections); in the editor the rebuilt reflections were mirrored left to right. Rebuild the probes and build/export the track again to update them. Checked against the engine's own compiled probes.
+- Opening another level while probes are rebuilding no longer leaves the viewport stuck in game lighting at a small capture size, and probe maps are written through a checked temporary file so a full disk can't leave a truncated one.
+- **Rebuild probes** works on workspaces in OneDrive folders, or in a Documents folder moved to another drive. The imported-material repair refused them as "file or directory links"; it now refuses only real links inside the workspace.
+- The imported-material repair also handles models imported with no level open and names that aren't all upper case. It used to skip the first silently and refuse the second, blocking the probe rebuild.
+- Changing an AI section's widths with **Markers…** or `set_ai_markers` keeps each marker's own **Blend widths between markers** setting. 0.2.5 rewrote it on every marker of the section, which changed how the AI drives sections that mix the setting, such as stock tracks'. Switching it in the form still sets it on all of them, markers that **Every node** adds take the section's setting, and when the markers differ the form offers keep, blend on all, or blend on none.
+- After **Test in game**, a save file that appeared during the test (for example one Steam Cloud brought down meanwhile) is left in place instead of being moved to the workspace's `.trackstudio/profile-backups` folder. The files you had before the test are still put back.
+- A custom AI or collision profile set back to 0 in the component inspector no longer makes **Install** and **Test in game** refuse the track as needing a game update; only enabled profiles need it.
+- Custom map AI checks and **Check in game** consider only the AI sections the game builds. A stale section that no route reaches no longer blocks release or makes every in-game check fail with "section count differs".
+- Conversion drafts no longer turn frozen source collision (a frozen body, or one under a frozen actor) into live, invisible collision.
+- A model placed both by actors that use its mesh physics and by actors with primitive colliders converts both ways; one of the two sets of placements used to fail with "Conflicting converted asset".
+- A mesh actor whose rigid body has its primitive colliders on child actors no longer also gets its model's mesh physics as a second collision.
+- The conversion draft's result lists the primitive colliders it placed and the source collision it left out, with the reason.
+- If Track Studio or Windows stops while the prop pack is being installed, the next start puts your previous content pack back instead of finding no pack at all, and old copies left beside the pack are removed. A copy whose cleanup was cut short is never put back.
+- When the game closes before a test race starts, the message names the game's own `FlatOut 4.log` in its install folder (not a developer-checkout path) and says when Steam isn't running.
+
+## Previous release: 0.2.6
 
 - Prevents repeated **Open file** clicks from crashing while the Windows file browser is starting. The button immediately shows **Opening...**, stays disabled until the request finishes, and recovers after cancellation or failure.
 - Opens the file browser directly on a separate desktop thread, starting in the project's Levels folder. This avoids the storage-picker/library startup delay, keeps the editor responsive, and records browser initialization time in the log. Folder selection uses the bundled desktop picker API.
@@ -13,6 +30,8 @@
 
 - **Test in game** starts the installed game for players who have never played Wreck Run; it no longer refuses because `WreckRunA.dat` and `WreckRunB.dat` are missing. Your saves are still put back as they were after the test, and a Wreck Run file the test created is moved to the workspace's `.trackstudio/profile-backups` folder.
 - **Test in game** protects the saves of the Steam account you're signed in as. It used to pick the account with the newest save, so on a PC with more than one Steam account a test could change your save without putting it back.
+- If Track Studio or Windows stops while the prop pack is being installed, the next start puts your previous content pack back instead of finding no pack at all, and old copies left beside the pack are removed.
+- When the game closes before a test race starts, the message names the game's own `FlatOut 4.log` in its install folder (not a developer-checkout path) and says when Steam isn't running.
 - Adds opt-in **Custom map AI** and **Custom object collision** controls to the Track panel, with matching MCP tools, undo and game-capability checks. Native clearance reports propose narrower lane widths without changing the route. Tracks without these settings keep the game's own behaviour; tracks that use them need a matching game update (`tools/game-patches/custom-map-policies.patch`) and counted driving tests. See `docs/CUSTOM_MAP_AI.md`.
 - Conversion drafts keep static box, sphere and capsule colliders with their sizes, masks and supported rigid-body settings. Parent-owned compounds keep their intermediate actors and local transforms. An actor with a primitive collider keeps its visual model separate from any optional mesh physics.
 - Explains why an older FBX import can show plain colours in rebuilt reflections, and how to repair it ("Solid colours in reflections" in `docs/FBX-IMPORT.md`).
