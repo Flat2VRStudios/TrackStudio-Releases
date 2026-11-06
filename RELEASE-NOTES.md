@@ -1,4 +1,31 @@
-# Track Studio 0.2.11
+# Track Studio 0.2.12
+
+- **Actor → Make imported objects editable…** restores named source objects from merged imported meshes. Moo Moo Meadows' four tree batches become 38 individual trees, each with its own trunk and leaves, so moving one no longer moves leaves throughout the level. Move, rotate, scale, duplicate, selection undo and save/reopen retain the object structure. Originals are kept; restoration is one undo step. See `docs/IMPORTED-OBJECT-EDITING.md` for details and supported cases.
+- Downloads include a per-user **Setup** installer with Start menu and optional desktop shortcuts, upgrades and Windows Settings uninstall. Your tracks, workspace and settings are kept separately.
+- The portable ZIP now has just **TrackStudio.exe**, **README.md** and **App/** at its top level. Keep them together. The launcher supports the same command line as the editor.
+- **Help → Check for updates** downloads and verifies the next stable installer from the public release repository. Updates wait for Save / Don't save / Cancel before closing the editor, then install and reopen. Startup checks can be disabled in Help. Portable users can install an updated copy or extract another ZIP to stay portable.
+- Sentry reports crashes and unexpected errors with recent log context, the editor version and commit. Your user folder is scrubbed from paths. **Help → Send error reports** turns reporting off; local reports and recovery remain available. Scripted UI tests and benchmarks do not send deliberate errors.
+- Imported models use their visible geometry for move, rotate and scale handles. When a merged mesh contains scattered pieces, clicking it in **Auto pivot** puts the handles at the clicked piece. **Center pivot** uses the whole selection; **Origin pivot** uses the saved actor origin. The choice is remembered, and handles follow transforms and undo without rewriting the model. The mesh remains one actor: transforming it still affects all its pieces.
+- **File → Exit** now uses the same Save / Don't save / Cancel confirmation as the window's close button.
+
+Fixes from an audit of 0.2.11:
+
+- **Save changes?**: Enter presses **Save all**. In 0.2.11 the **Choose files to save…** link took the first focus, so Enter opened the checklist.
+- **Undo** works after you tick or untick **Static** and then select another actor or save. It used to fail, lose the step and could strip the actor's later settings.
+- **Duplicate**, **Lay out grid** and adding or removing a prefab are all or nothing: if one part is refused, nothing changes. They used to keep half the edit while saying it failed. **Duplicate** with **Place on ground** works on locked props.
+- Moving focus through a number or transform box no longer writes its value back as an undo step. Real edits are still written.
+- Arrowing through a reference or resource suggestion list no longer picks the first item; press Enter or click to choose.
+- **Lay out grid** on a point-to-point track refuses a grid that would start cars inside each other, and **Check level** warns about grid slots under 2 m apart.
+- **Add RankSpline** refuses a race that ends at an **EndLine**: with a RankSpline the game ignores the EndLine and the race never finishes. **Check level** reports one already there.
+- Terrain **Save State** includes layers you haven't loaded yet, so **Load State** brings back a later paint or first sculpt.
+- **Import from another game** keeps going past a sky dome it can't read, and the import dialog opens when one of the game's packages is unreadable. A damaged terrain tile is skipped instead of stopping the level from loading.
+- The FBX UV range error names the FBX mesh to fix. UVs a hair past ±8 (rounding in the exporter) are accepted.
+- **Install in my game** asks you to open the track first on games with track folders. Without a level open it used to copy loose files that made the game refuse the track. **Remove from my game** also removes an older loose install.
+- **Remove from my game** can be run again to finish an uninstall that couldn't restore every file; it used to stay stuck for good. A file that's in use is reported instead of stopping the uninstall, and leftover copies of the track that the game would still load are removed.
+- A Workshop item deleted on Steam (or owned by another account) can be forgotten so the track can be published again; keeping it is the default.
+- Pinned property panes and camera views close with the main window. **Load layer** in the Outliner acts on the level that is open. A `null` in settings.json no longer stops Track Studio starting. **Export** accepts a folder typed with a trailing backslash.
+
+## Previous release: 0.2.11
 
 - **Save changes?** now offers **Save all**, **Don't save** and **Cancel** together when closing the editor, closing a level or switching tracks. **Choose files to save…** remains available as a link. Discarding continues without writing the level; cancelling keeps its unsaved edits. Clean levels continue without an empty save prompt.
 - New FBX imports refuse UV coordinates that cannot fit the game's **−8 to +8** rigid-mesh range, with the mesh/coordinate and correction instructions. Earlier imports silently clipped larger tiled coordinates, which can stretch a road's textures in game even when its source FBX looks correct in the editor. The check runs before creating imported materials or model files.

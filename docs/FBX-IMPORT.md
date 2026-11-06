@@ -8,6 +8,14 @@ The importer keeps the model, material sources and compiled resources under the 
 
 The editor's source material bindings keep the original FBX node names and material slots; the game's compiled bindings use the combined imported prop. Solid imports keep the visible surface as well as its collider. Older imports can be repaired in place when rebuilding probes, without reimporting the FBX or replacing the placed actors.
 
+## Handles on merged imports
+
+Some imported tracks group distant surfaces into one actor, often by material. In **Auto pivot**, clicking a disconnected piece puts the transform handles at that piece's center. Clicking another piece of the same actor moves the handles there. **Center pivot** uses the whole selection's bounds; **Origin pivot** uses its saved actor origin. These are editor preferences and do not rewrite the model.
+
+All pieces of that actor still move, rotate or scale together. A geometric piece is not necessarily a complete building: touching geometry may be connected, while a building's separate materials may belong to different actors. To edit a building independently, its geometry needs to be separated into its own object.
+
+For imports that retain original object identities, **Actor → Make imported objects editable…** restores those objects across their material batches. Moo Moo Meadows' trunks, leaves and inner leaf shells can then move as individual complete trees. See [Moving individual imported objects](IMPORTED-OBJECT-EDITING.md).
+
 ## UV tiling and texture settings
 
 A road can look correct in the editor but stretched in game if its mesh has large tiled UV coordinates. The editor previews the source FBX's floating-point UVs; the game's rigid P3D mesh stores each UV component as a signed 16-bit value, with a supported range of **−8 to +8**. Earlier Track Studio imports silently clipped larger values: for example, 24 became 8. Vertices that should have different coordinates can then share the same one, stretching a texture across a triangle. This is separate from material bindings and probe maps.
