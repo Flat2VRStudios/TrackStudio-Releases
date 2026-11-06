@@ -1,9 +1,14 @@
-# Track Studio 0.2.9
+# Track Studio 0.2.10
+
+- An Asset Editor **...** pressed while another file browser is open says that a file chosen there isn't used for its field, so the browser brought to the front isn't taken for the field's own. The Asset Editor's browsers are titled with the asset's whole path, so two assets of the same name in different folders can't be confused.
+- Corrects two 0.2.9 notes below: an open file browser is brought to the front from the main window and Asset Editors (folder and save browsers aren't), and the developer-checkout repair is named in the **Build first?** question, which can follow **Auto update probe layers?**.
+
+## Previous release: 0.2.9
 
 - **Import 3D model**, the Asset Editor's **...** buttons and the other file browsers that don't open in your track's folder start in the folder you used last, or Documents the first time. 0.2.8 opened every one of them in Track Studio's install folder.
 - The Asset Editor's **...** buttons open the file browser over the Asset Editor, which waits for it, titled with the field and asset it is for. It used to open over the main window and leave the Asset Editor clickable. A file picked after the Asset Editor closed, or after its asset was edited, reloaded or shown for another platform, is no longer written to it, and if Windows can't show the browser the Asset Editor says so instead of Track Studio closing with an error.
-- A **Browse**, **...** or **Save** button pressed in any window while a file browser is already open brings that browser to the front. It used to do nothing.
-- In a developer checkout, the game-rendered **Rebuild probes** names the repair of older imported models in its first question and writes nothing if you cancel.
+- A **Browse**, **...** or **Save** button pressed in the main window or an Asset Editor while a file browser is already open brings that browser to the front. It used to do nothing. (A folder or save browser isn't brought forward.)
+- In a developer checkout, the game-rendered **Rebuild probes** names the repair of older imported models in its **Build first?** question and writes nothing if you cancel.
 - **Rebuild probes** stops if another level is opened while it asks a question or builds, instead of updating, repairing or rebuilding the level that is open then.
 - After a probe rebuild the viewport always returns to its own size, even if reloading the lighting fails.
 
