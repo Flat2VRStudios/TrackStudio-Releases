@@ -8,6 +8,22 @@ The importer keeps the model, material sources and compiled resources under the 
 
 The editor's source material bindings keep the original FBX node names and material slots; the game's compiled bindings use the combined imported prop. Solid imports keep the visible surface as well as its collider. Older imports can be repaired in place when rebuilding probes, without reimporting the FBX or replacing the placed actors.
 
+## UV tiling and texture settings
+
+A road can look correct in the editor but stretched in game if its mesh has large tiled UV coordinates. The editor previews the source FBX's floating-point UVs; the game's rigid P3D mesh stores each UV component as a signed 16-bit value, with a supported range of **−8 to +8**. Earlier Track Studio imports silently clipped larger values: for example, 24 became 8. Vertices that should have different coordinates can then share the same one, stretching a texture across a triangle. This is separate from material bindings and probe maps.
+
+New imports check the UVs used by the visible LOD0 meshes before creating materials or model files. The error names the mesh and coordinate, explains the range and suggests a correction. The check uses the same UV-layer selection and **V → 1 − V** conversion as the importer; authored FBX V values must therefore be between −7 and +9. Missing UV layers keep their existing fallback behaviour.
+
+For a stock Generic material, keep the mesh UVs inside that range and use its **TileUV** material parameter for repeated textures. Its four values are `U scale;V scale;U offset;V offset`, defaulting to `1;1;0;0`. It transforms the mesh UVs before sampling the diffuse, normal and structure maps. A useful authoring correction is:
+
+1. In the modelling app, scale the UVs down by a positive factor around UV **(0, 1)**, so `u' = u / factor` and `v' = 1 + (v − 1) / factor`. This pivot accounts for the importer's V flip. Choose a factor that brings every used coordinate into range.
+2. Multiply the material's existing TileUV U and V scales by that factor; keep its offsets. For example, with default tiling, a factor of 16 gives `16;16;0;0`. Apply this only to materials whose mesh UVs were scaled; shared materials and custom effects need separate consideration.
+3. Re-export the FBX, import it under a new name, set the new material's TileUV through **Track → Material parameters…** (or the asset's material fields), replace the affected Mesh resource and check the result in game. Normal and emission maps should be checked too.
+
+An existing import's clipped compiled UVs cannot be reconstructed from the P3D alone. Correct its original/staged FBX and rebuild or reimport the model. Binding repair preserves old geometry; it does not recover this lost tiling. Rebuilding probes or editing a texture's filtering does not repair clipped mesh coordinates.
+
+**MipMapFiltering is not runtime texture wrapping.** In a `.PTX.XML` it controls edge handling while the content compiler generates mip levels. The stock Generic `.PFX.XML` already uses **Wrap** addressing for diffuse, normal and structure maps. See the [texture and material XML reference](TEXTURE-MATERIAL-XML.md) for the separate settings and their exact names.
+
 ### Solid colours in reflections
 
 On a retail install, **Ship → Lighting probes → Rebuild probes** captures Track Studio's own rendered scene. An older FBX import with broken editor material bindings can therefore look textured in the game while its rebuilt reflections contain the editor's plain fallback colours. The compiled model and the probe maps are separate resources: a working game material does not correct a reflection already baked from the faulty preview.
@@ -42,4 +58,4 @@ The importer reports other exported texture channels, such as roughness or heigh
 
 The tests also reopen imports through `MeshLibrary`, check their actual preview material paths, and compare transformed multi-node source triangles and bounds with the combined runtime geometry. New P3D source descriptors carry the editor-only `trackstudio-rigid-import="1"` attribute. It allows their explicitly retained surface to be shown while also used for collision; unmarked stock collision-only resources retain their existing visibility. The native descriptor loader ignores this metadata attribute.
 
-Legacy repair compares oriented triangle positions and UVs in material-slot order. UVs are compared after the writer's signed 16-bit fixed-point truncation and saturation (approximately −8 to +8), with exact encoded equality. This accepts valid tiled source UVs outside the stored range while refusing a one-step change to the runtime UV stream; it does not widen the position tolerance or infer new material assignments.
+Legacy repair compares oriented triangle positions and UVs in material-slot order. UVs are compared after the old writer's signed 16-bit fixed-point truncation and saturation (approximately −8 to +8), with exact encoded equality. This recognizes already-imported tiled source UVs outside the stored range while refusing a one-step change to the runtime UV stream; it does not widen the position tolerance, infer new material assignments or recover clipped UVs. New imports reject unrepresentable coordinates before writing their assets.

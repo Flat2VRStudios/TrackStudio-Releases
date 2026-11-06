@@ -1,4 +1,10 @@
-# Track Studio 0.2.10
+# Track Studio 0.2.11
+
+- **Save changes?** now offers **Save all**, **Don't save** and **Cancel** together when closing the editor, closing a level or switching tracks. **Choose files to save…** remains available as a link. Discarding continues without writing the level; cancelling keeps its unsaved edits. Clean levels continue without an empty save prompt.
+- New FBX imports refuse UV coordinates that cannot fit the game's **−8 to +8** rigid-mesh range, with the mesh/coordinate and correction instructions. Earlier imports silently clipped larger tiled coordinates, which can stretch a road's textures in game even when its source FBX looks correct in the editor. The check runs before creating imported materials or model files.
+- Adds `docs/TEXTURE-MATERIAL-XML.md`, covering texture compiler fields, Generic material parameters and runtime sampler addressing, plus a UV tiling correction guide in `docs/FBX-IMPORT.md`. Generic already uses Wrap; PTX `MipMapFiltering` is a separate mip-generation setting. This release prevents new clipped imports; it does **not** automatically repair existing stretched geometry. Correct and rebuild/reimport its original FBX. Existing-import material-binding repair remains compatible with older clipped UVs.
+
+## Previous release: 0.2.10
 
 - An Asset Editor **...** pressed while another file browser is open says that a file chosen there isn't used for its field, so the browser brought to the front isn't taken for the field's own. The Asset Editor's browsers are titled with the asset's whole path, so two assets of the same name in different folders can't be confused.
 - Corrects two 0.2.9 notes below: an open file browser is brought to the front from the main window and Asset Editors (folder and save browsers aren't), and the developer-checkout repair is named in the **Build first?** question, which can follow **Auto update probe layers?**.
