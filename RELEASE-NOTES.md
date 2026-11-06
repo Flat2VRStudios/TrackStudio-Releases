@@ -1,4 +1,11 @@
-# Track Studio 0.2.5
+# Track Studio 0.2.6
+
+- Prevents repeated **Open file** clicks from crashing while the Windows file browser is starting. The button immediately shows **Opening...**, stays disabled until the request finishes, and recovers after cancellation or failure.
+- Opens the file browser directly on a separate desktop thread, starting in the project's Levels folder. This avoids the storage-picker/library startup delay, keeps the editor responsive, and records browser initialization time in the log. Folder selection uses the bundled desktop picker API.
+- Fixes false refusals when repairing existing FBX imports with large tiled UVs. The repair verifies the game's actual stored UV representation while retaining its geometry, triangle-order and material-slot checks.
+- Explains an unverified material match with the failing slot/triangle and recovery actions, instead of asserting that the user changed the FBX. Original material and placement edits remain preserved.
+
+## Previous release: 0.2.5
 
 - Repairs known older imported FBX material bindings in place before **Ship → Lighting probes → Rebuild probes**, with source backups and preserved material edits, geometry and actor placement. Reimporting is no longer required for this known binding problem.
 - Rebuilds probe visibility for each cube face, waits for repaired textures, corrects cube orientation and excludes editor highlights and display modes from the capture.
